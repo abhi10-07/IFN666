@@ -5,7 +5,7 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
 const API_KEY = "cbfbcc3405c685d66f4623bc57dbb1a3";
 
-export default function StocksList() {
+const Stocks = () => {
   const [rowData, setRowData] = useState([]);
   const columns = [
     { headerName: "Stocksymbol", field: "symbol" },
@@ -41,4 +41,6 @@ export default function StocksList() {
       <AgGridReact columnDefs={columns} rowData={rowData} />
     </div>
   );
-}
+};
+
+export default Stocks;

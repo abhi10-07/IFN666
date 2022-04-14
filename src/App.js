@@ -11,12 +11,9 @@ function App() {
     <Layout>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-            <Route path="stocks" element={<Stocks />}>
-              <Route path=":stockId" element={<Stock />} />
-            </Route>
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/stocks/" element={<Stocks />} />
+          <Route path="/stocks/:stockId" element={<Stock />} />
         </Routes>
       </BrowserRouter>
     </Layout>
