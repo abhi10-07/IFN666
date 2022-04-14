@@ -46,7 +46,11 @@ const Header = (props) => {
                           props.activeState === "home" ? " active" : ""
                         }`}
                       >
-                        <NavLink className="nav-link" to="/">
+                        <NavLink
+                          className="nav-link"
+                          to="/"
+                          onClick={props.onclick}
+                        >
                           Home
                         </NavLink>
                       </li>
@@ -55,9 +59,13 @@ const Header = (props) => {
                           props.activeState === "all_stock" ? " active" : ""
                         }`}
                       >
-                        <a className="nav-link" href="about.html">
+                        <NavLink
+                          className="nav-link"
+                          to="/about.html"
+                          onClick={props.onclick}
+                        >
                           All Stocks
-                        </a>
+                        </NavLink>
                       </li>
                     </Router>
                   </ul>

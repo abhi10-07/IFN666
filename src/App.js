@@ -1,14 +1,25 @@
-import React, { useState } from "react";
-import Header from "./components/Layout/Header";
-import Home from "./components/Home/Home";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Layout from "./components/layout/Layout";
+import Home from "./pages/Home";
+import Stocks from "./pages/Stocks";
+import Stock from "./pages/Stock";
 
 function App() {
-  const [activeState, setActiveState] = useState("home");
   return (
-    <div>
-      <Header activeState={activeState} />
-      <Home />
-    </div>
+    <Layout>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route index element={<Home />} />
+            <Route path="stocks" element={<Stocks />}>
+              <Route path=":stockId" element={<Stock />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Layout>
   );
 }
 
