@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
-const API_KEY = "cbfbcc3405c685d66f4623bc57dbb1a3";
+import { FMI_URL, FMI_KEY } from "../../Constants";
 
 const Stocks = () => {
   const [rowData, setRowData] = useState([]);
@@ -14,9 +14,7 @@ const Stocks = () => {
   ];
 
   useEffect(() => {
-    fetch(
-      `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=${API_KEY}`
-    )
+    fetch(FMI_URL(FMI_KEY))
       .then((res) => res.json())
       .then((stocks) =>
         stocks.map((stock) => {
