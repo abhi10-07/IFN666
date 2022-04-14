@@ -3,7 +3,7 @@ import React from "react";
 import Banner from "../components/home/Banner";
 import SearchBox from "../components/home/SearchBox";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
       <Banner />
@@ -12,4 +12,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

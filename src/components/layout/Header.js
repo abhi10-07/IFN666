@@ -61,7 +61,7 @@ const Header = (props) => {
                       >
                         <NavLink
                           className="nav-link"
-                          to="/about.html"
+                          to="/stocks"
                           onClick={props.onclick}
                         >
                           All Stocks
