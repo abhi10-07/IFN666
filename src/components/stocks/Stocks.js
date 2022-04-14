@@ -8,9 +8,11 @@ import { FMI_URL, FMI_KEY } from "../../Constants";
 const Stocks = () => {
   const [rowData, setRowData] = useState([]);
   const columns = [
-    { headerName: "Stocksymbol", field: "symbol" },
     { headerName: "Name", field: "name" },
-    { headerName: "Industry", field: "sector" },
+    { headerName: "Stocksymbol", field: "symbol" },
+    { headerName: "Price", field: "price" },
+    { headerName: "Exchange", field: "exchangeShortName" },
+    { headerName: "Type", field: "type" },
   ];
 
   useEffect(() => {
@@ -21,7 +23,9 @@ const Stocks = () => {
           return {
             symbol: stock.symbol,
             name: stock.name,
-            sector: stock.sector,
+            price: stock.price,
+            exchangeShortName: stock.exchangeShortName,
+            type: stock.type,
           };
         })
       )
@@ -33,7 +37,7 @@ const Stocks = () => {
       className="ag-theme-balham"
       style={{
         height: "300px",
-        width: "800px",
+        width: "100%",
       }}
     >
       <AgGridReact columnDefs={columns} rowData={rowData} />
