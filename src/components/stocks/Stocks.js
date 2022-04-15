@@ -3,27 +3,29 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
-const API_KEY = "cbfbcc3405c685d66f4623bc57dbb1a3";
+import { FMI_URL, FMI_KEY } from "../../Constants";
 
-export default function StocksList() {
+const Stocks = () => {
   const [rowData, setRowData] = useState([]);
   const columns = [
-    { headerName: "Stocksymbol", field: "symbol" },
     { headerName: "Name", field: "name" },
-    { headerName: "Industry", field: "sector" },
+    { headerName: "Stocksymbol", field: "symbol" },
+    { headerName: "Price", field: "price" },
+    { headerName: "Exchange", field: "exchangeShortName" },
+    { headerName: "Type", field: "type" },
   ];
 
   useEffect(() => {
-    fetch(
-      `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=${API_KEY}`
-    )
+    fetch(FMI_URL(FMI_KEY))
       .then((res) => res.json())
       .then((stocks) =>
         stocks.map((stock) => {
           return {
             symbol: stock.symbol,
             name: stock.name,
-            sector: stock.sector,
+            price: stock.price,
+            exchangeShortName: stock.exchangeShortName,
+            type: stock.type,
           };
         })
       )
@@ -35,10 +37,12 @@ export default function StocksList() {
       className="ag-theme-balham"
       style={{
         height: "300px",
-        width: "800px",
+        width: "100%",
       }}
     >
       <AgGridReact columnDefs={columns} rowData={rowData} />
     </div>
   );
-}
+};
+
+export default Stocks;

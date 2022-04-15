@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
 
 import "../../assets/css/header.css";
 import LOGO from "../../assets/images/logo-stock-market.png";
@@ -14,13 +14,15 @@ const Header = (props) => {
               <div className="full">
                 <div className="center-desk">
                   <div className="logo">
-                    <a href="index.html">
-                      <img
-                        src={LOGO}
-                        alt="Stock Market Website"
-                        style={{ width: "75px" }}
-                      />
-                    </a>
+                    <Router>
+                      <NavLink to="/">
+                        <img
+                          src={LOGO}
+                          alt="Stock Market Website"
+                          style={{ width: "75px" }}
+                        />
+                      </NavLink>
+                    </Router>
                   </div>
                 </div>
               </div>
