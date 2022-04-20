@@ -30,6 +30,8 @@ const Stock = (props) => {
         else apiChartData.push(responseData[key]);
       }
 
+      setStockChartData(apiChartData);
+
       if (Object.keys(apiTextData).length !== 0) {
         let liArray = [];
         apiTextData.map((item) =>
@@ -44,8 +46,6 @@ const Stock = (props) => {
         const infoData = <ul>{liArray.map((item) => item)}</ul>;
         setStockTextData(infoData);
       }
-
-      setStockChartData(apiChartData);
     };
     fetchData();
   }, [stockId]);
