@@ -4,6 +4,26 @@ export const FMI_URL = (key) => {
   return `https://financialmodelingprep.com/api/v3/stock/list?apikey=${key}`;
 };
 
+export const FMI_TOPGAINER_URL = (key) => {
+  return `https://financialmodelingprep.com/api/v3/stock_market/gainers?apikey=${key}`;
+};
+
+export const FMI_TOPLOSER_URL = (key) => {
+  return `https://financialmodelingprep.com/api/v3/stock_market/losers?apikey=${key}`;
+};
+
+export const FMI_TOPACTIVE_URL = (key) => {
+  return `https://financialmodelingprep.com/api/v3/stock_market/actives?apikey=${key}`;
+};
+
+export const FMI_STOCK_INFO_URL = (sym, key) => {
+  return `https://financialmodelingprep.com/api/v3/quote/${sym}?apikey=${key}`;
+};
+
+export const FMI_STOCK_DETAILS_URL = (sym, key) => {
+  return `https://financialmodelingprep.com/api/v3/profile/${sym}?apikey=${key}`;
+};
+
 export const APLHA_URL = (sym, key) => {
   return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${sym}&interval=30min&apikey=${key}`;
 };

@@ -1,0 +1,32 @@
+.main_cont {
+    width: 100%;
+}
+
+.upc {
+    text-transform: uppercase;
+    color: #202020;
+    font: 12px 'robotomedium',Arial, sans-serif;
+    font-weight: 900;
+}
+
+.bred_list {
+    margin: 0px 0 0 5px;
+    padding: 0px;
+    display: inline;
+}
+
+.bred_list li {
+    display: inline-block;
+    padding-right: 6px;
+    font: 12px 'robotomedium',Arial, sans-serif;
+    color: #202020;
+    font-weight: 400;
+}
+
+.bred_list li a {
+    color: #1765a5;
+}
+
+.col_graysp {
+    color: #999999;
+}
