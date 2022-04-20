@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "../../assets/css/header.css";
 import LOGO from "../../assets/images/logo-stock-market.png";
@@ -14,15 +14,13 @@ const Header = (props) => {
               <div className="full">
                 <div className="center-desk">
                   <div className="logo">
-                    <Router>
-                      <NavLink to="/">
-                        <img
-                          src={LOGO}
-                          alt="Stock Market Website"
-                          style={{ width: "75px" }}
-                        />
-                      </NavLink>
-                    </Router>
+                    <NavLink to="/">
+                      <img
+                        src={LOGO}
+                        alt="Stock Market Website"
+                        style={{ width: "75px" }}
+                      />
+                    </NavLink>
                   </div>
                 </div>
               </div>
@@ -42,34 +40,32 @@ const Header = (props) => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarsExample04">
                   <ul className="navbar-nav mr-auto">
-                    <Router>
-                      <li
-                        className={`nav-item ${
-                          props.activeState === "home" ? " active" : ""
-                        }`}
+                    <li
+                      className={`nav-item ${
+                        props.activeState === "home" ? " active" : ""
+                      }`}
+                    >
+                      <NavLink
+                        className="nav-link"
+                        to="/"
+                        onClick={props.onclick}
                       >
-                        <NavLink
-                          className="nav-link"
-                          to="/"
-                          onClick={props.onclick}
-                        >
-                          Home
-                        </NavLink>
-                      </li>
-                      <li
-                        className={`nav-item ${
-                          props.activeState === "all_stock" ? " active" : ""
-                        }`}
+                        Home
+                      </NavLink>
+                    </li>
+                    <li
+                      className={`nav-item ${
+                        props.activeState === "all_stock" ? " active" : ""
+                      }`}
+                    >
+                      <NavLink
+                        className="nav-link"
+                        to="/stocks"
+                        onClick={props.onclick}
                       >
-                        <NavLink
-                          className="nav-link"
-                          to="/stocks"
-                          onClick={props.onclick}
-                        >
-                          All Stocks
-                        </NavLink>
-                      </li>
-                    </Router>
+                        All Stocks
+                      </NavLink>
+                    </li>
                   </ul>
                 </div>
               </nav>
