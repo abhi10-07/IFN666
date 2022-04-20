@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react";
 
 import { LineChart } from "../UI/Chart";
 import {
+  FMI_KEY,
   ALPHA_KEY,
   APLHA_URL,
   APLHA_HIGH_POINTS,
   APLHA_LOW_POINTS,
+  FMI_STOCK_DETAILS_URL,
 } from "../../Constants";
 
 import "../../assets/css/about.css";
+import tab_bg from "../../assets/images/bg_borderblue.jpg";
 
 const Stock = (props) => {
+  const [stockDetailsData, setStockDetailsData] = useState([]);
   const [stockTextData, setStockTextData] = useState([]);
   const [stockChartData, setStockChartData] = useState([]);
   const [chartData, setChartData] = useState({});
@@ -19,6 +23,13 @@ const Stock = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // For stock description
+      const responseDesc = await fetch(FMI_STOCK_DETAILS_URL(stockId, FMI_KEY));
+      const responseDescData = await responseDesc.json();
+
+      setStockDetailsData(responseDescData[0]);
+
+      // For chart
       const response = await fetch(APLHA_URL(stockId, ALPHA_KEY));
       const responseData = await response.json();
 
@@ -58,11 +69,14 @@ const Stock = (props) => {
     if (stockChartData.length !== 0) {
       stockChartData.map((item) =>
         Object.entries(item).forEach(([key, value]) => {
-          let text = "";
-          text = key.split(" ");
-          text = text[1].split(":");
-          text = `${text[0]}:${text[1]}`;
-          labels.push(text);
+          let timeStamp = "";
+          let datePoint = "";
+          let timePoint = "";
+          timeStamp = key.split(" ");
+          datePoint = timeStamp[0].split("-");
+          timePoint = timeStamp[1].split(":");
+          timePoint = `${timePoint[0]}:${timePoint[1]}`;
+          labels.push(`${datePoint[2]}-${datePoint[1]} ${timePoint}`);
 
           Object.entries(value).forEach(([k, val]) => {
             if (k === APLHA_HIGH_POINTS) {
@@ -100,6 +114,9 @@ const Stock = (props) => {
 
   useEffect(() => {
     const res = getChart(stockChartData);
+
+    res.labels.reverse();
+
     const datasets = [
       {
         label: "High",
@@ -127,31 +144,47 @@ const Stock = (props) => {
     setIsLoading(false);
   }, [stockChartData]);
 
-  console.log(stockTextData);
-
   return (
     <div className="about">
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-5">
-            <div className="titlepage">
-              <div className="margin_0">{stockTextData}</div>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <div
+              className="stock-tab"
+              style={{ backgroundImage: "url(" + tab_bg + ")" }}
+            >
+              <h1>
+                {`${stockDetailsData["symbol"]} (${stockDetailsData["companyName"]})`}{" "}
+                <img
+                  src={stockDetailsData["image"]}
+                  alt={stockDetailsData["symbol"]}
+                />
+              </h1>
+              <h6>
+                <span>Sector</span>: {stockDetailsData["sector"]}
+              </h6>
             </div>
-          </div>
-          <div className="col-md-7">
-            <div className="about_img">
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <figure>
-                  {chartData["valueSet"] === true && (
-                    <LineChart options={options} data={chartData} />
-                  )}
-                </figure>
-              )}
+            <div className="row">
+              <div className="col-md-5">
+                <div className="titlepage">
+                  <div className="margin_0"></div>
+                </div>
+              </div>
+              <div className="col-md-7">
+                <div className="about_img">
+                  <figure>
+                    {chartData["valueSet"] === true && (
+                      <LineChart options={options} data={chartData} />
+                    )}
+                  </figure>
+                  <div className="stock-edata">{stockTextData}</div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </div>
   );

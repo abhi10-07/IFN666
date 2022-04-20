@@ -1,7 +1,8 @@
 
+
 .about {
     background-color: #fff;
-    padding-top: 85px;
+    padding-top: 5px;
 }
 
 .about .titlepage {
@@ -31,4 +32,35 @@
 
 .about_img figure {
     margin: 0;
+}
+
+.stock-tab{
+    margin-bottom: 10px;
+    margin-top: 15px;
+    background: left bottom -33px repeat-x;
+    padding-bottom: 20px;
+}
+
+.stock-tab img{
+    display: block;
+    width: 40px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.stock-tab h1, h6{
+    padding: 0px;
+    margin: 0px;
+}
+
+.stock-tab h6 span{
+    font-size:14px;
+    color:#bdb3b3;
+}
+
+.stock-edata{
+    margin-top: 10px;
+    border-top: #eaeaea 2px dashed;
+    padding-top:10px;
 }
