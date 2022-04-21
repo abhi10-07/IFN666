@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import UserContext from "../../context/UserContext";
+import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa";
 
-import { LineChart } from "../UI/Chart";
+import Graph from "./Graph";
 import {
   FMI_KEY,
   ALPHA_KEY,
   APLHA_URL,
-  APLHA_HIGH_POINTS,
-  APLHA_LOW_POINTS,
   FMI_STOCK_DETAILS_URL,
 } from "../../Constants";
 
@@ -14,10 +14,12 @@ import "../../assets/css/about.css";
 import tab_bg from "../../assets/images/bg_borderblue.jpg";
 
 const Stock = (props) => {
+  const { setLoaderHandler } = useContext(UserContext);
+
   const [stockDetailsData, setStockDetailsData] = useState([]);
   const [stockTextData, setStockTextData] = useState([]);
   const [stockChartData, setStockChartData] = useState([]);
-  const [chartData, setChartData] = useState({});
+
   const [isLoading, setIsLoading] = useState(true);
   const stockId = props.id;
 
@@ -57,134 +59,64 @@ const Stock = (props) => {
         const infoData = <ul>{liArray.map((item) => item)}</ul>;
         setStockTextData(infoData);
       }
+
+      setLoaderHandler();
     };
     fetchData();
-  }, [stockId]);
-
-  const getChart = (stockChartData) => {
-    const labels = [];
-    const dataHighPoints = [];
-    const dataLowPoints = [];
-
-    if (stockChartData.length !== 0) {
-      stockChartData.map((item) =>
-        Object.entries(item).forEach(([key, value]) => {
-          let timeStamp = "";
-          let datePoint = "";
-          let timePoint = "";
-          timeStamp = key.split(" ");
-          datePoint = timeStamp[0].split("-");
-          timePoint = timeStamp[1].split(":");
-          timePoint = `${timePoint[0]}:${timePoint[1]}`;
-          labels.push(`${datePoint[2]}-${datePoint[1]} ${timePoint}`);
-
-          Object.entries(value).forEach(([k, val]) => {
-            if (k === APLHA_HIGH_POINTS) {
-              dataHighPoints.push(val);
-            }
-            if (k === APLHA_LOW_POINTS) {
-              dataLowPoints.push(val);
-            }
-          });
-        })
-      );
-    }
-
-    const element = {
-      labels,
-      highPoints: dataHighPoints,
-      lowPoints: dataLowPoints,
-    };
-
-    return element;
-  };
-
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Market Indices - " + props.id,
-      },
-    },
-  };
-
-  useEffect(() => {
-    const res = getChart(stockChartData);
-
-    res.labels.reverse();
-
-    const datasets = [
-      {
-        label: "High",
-        data: res.labels.map((label, index) => res.highPoints[index]),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        label: "Low",
-        data: res.labels.map((label, index) => res.lowPoints[index]),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-      },
-    ];
-
-    const dataLabels = res.labels;
-
-    const data = {
-      valueSet: dataLabels.length > 0 ? true : false,
-      labels: dataLabels,
-      datasets,
-    };
-
-    setChartData(data);
-    setIsLoading(false);
-  }, [stockChartData]);
+  }, [stockId, setLoaderHandler]);
 
   return (
     <div className="about">
       <div className="container-fluid">
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            <div
-              className="stock-tab"
-              style={{ backgroundImage: "url(" + tab_bg + ")" }}
-            >
-              <h1>
-                {`${stockDetailsData["symbol"]} (${stockDetailsData["companyName"]})`}{" "}
-                <img
-                  src={stockDetailsData["image"]}
-                  alt={stockDetailsData["symbol"]}
-                />
-              </h1>
-              <h6>
-                <span>Sector</span>: {stockDetailsData["sector"]}
-              </h6>
-            </div>
-            <div className="row">
-              <div className="col-md-5">
-                <div className="titlepage">
-                  <div className="margin_0"></div>
+        <div
+          className="stock-tab"
+          style={{ backgroundImage: "url(" + tab_bg + ")" }}
+        >
+          <h1>
+            {`${stockDetailsData["symbol"]} (${stockDetailsData["companyName"]})`}{" "}
+            <img
+              src={stockDetailsData["image"]}
+              alt={stockDetailsData["symbol"]}
+            />
+          </h1>
+          <h6>
+            <span>Sector</span>: {stockDetailsData["sector"]}
+          </h6>
+        </div>
+        <div className="row">
+          <div className="col-md-5">
+            <div className="titlepage">
+              <div className="margin_0">
+                <div className="stock_price">
+                  {stockDetailsData["price"]} {stockDetailsData["currency"]}
                 </div>
-              </div>
-              <div className="col-md-7">
-                <div className="about_img">
-                  <figure>
-                    {chartData["valueSet"] === true && (
-                      <LineChart options={options} data={chartData} />
-                    )}
-                  </figure>
-                  <div className="stock-edata">{stockTextData}</div>
+                <div className="stock_change">
+                  {" "}
+                  {stockDetailsData["changes"] < 0 ? (
+                    <>
+                      <span style={{ color: "red" }}>
+                        <FaCaretSquareDown /> {stockDetailsData["changes"]}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ color: "green" }}>
+                        <FaCaretSquareUp /> {stockDetailsData["changes"]}
+                      </span>
+                    </>
+                  )}
                 </div>
+                <div className="stock-edata">{stockTextData}</div>
               </div>
             </div>
-          </>
-        )}
+          </div>
+          <div className="col-md-7">
+            <div className="about_img">
+              <Graph stockChartData={stockChartData} id={props.id} />
+            </div>
+          </div>
+          <div className="stock_desc">{stockDetailsData["description"]}</div>
+        </div>
       </div>
     </div>
   );

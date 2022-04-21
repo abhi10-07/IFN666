@@ -41,3 +41,12 @@
     background: #fff;
     margin-bottom: 5px;
 }
+
+
+.header-search{
+    width: 30px;
+    height: 31px;
+    padding: 0px;
+    font-size: 15px;
+    margin-bottom: 3px;
+}

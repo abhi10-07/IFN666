@@ -64,3 +64,14 @@
     border-top: #eaeaea 2px dashed;
     padding-top:10px;
 }
+
+.stock_price{
+    color: #000;
+    font: 700 36px 'Lato', arial;
+}
+
+.stock_change {
+    font: 700 23px 'Lato', arial;
+}
+
+
