@@ -1,10 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { Form, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import "../../assets/css/header.css";
 import LOGO from "../../assets/images/logo-stock-market.png";
+import { FaSearch } from "react-icons/fa";
 
 const Header = (props) => {
+  const [textIsValid, setTextIsValid] = useState(true);
+  const textInputRef = useRef();
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const enteredText = textInputRef.current.value;
+
+    if (
+      enteredText.trim().length === 0 ||
+      enteredText === "" ||
+      enteredText == null
+    ) {
+      setTextIsValid(false);
+      return;
+    } else {
+      setTextIsValid(true);
+    }
+  };
   return (
     <header>
       <div className="header">
@@ -65,6 +86,26 @@ const Header = (props) => {
                       >
                         All Stocks
                       </NavLink>
+                    </li>
+                    <li className={`nav-item`}>
+                      <Form onSubmit={submitHandler}>
+                        <input
+                          ref={textInputRef}
+                          type="text"
+                          placeholder="Search"
+                          className=""
+                          style={{ padding: 0 }}
+                        />
+                        <Button
+                          className="btn btn-outline-secondary border-left-0 border header-search"
+                          type="submit"
+                        >
+                          <FaSearch />
+                        </Button>
+                        {!textIsValid && (
+                          <p className="error">Please enter a valid Stock.</p>
+                        )}
+                      </Form>
                     </li>
                   </ul>
                 </div>
