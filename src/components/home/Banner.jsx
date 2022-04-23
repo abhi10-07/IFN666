@@ -6,6 +6,8 @@ import Banner1img from "../../assets/images/stock-banner1.jpeg";
 import Banner2img from "../../assets/images/stock-banner2.jpeg";
 import Banner3img from "../../assets/images/stock-banner3.jpeg";
 
+import SearchBox from "./SearchBox";
+
 const Banner = () => {
   return (
     <section className="banner_main">
@@ -60,6 +62,7 @@ const Banner = () => {
           <span className="sr-only">Next</span>
         </a>
       </div>
+      <SearchBox />
     </section>
   );
 };
