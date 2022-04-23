@@ -1,6 +1,7 @@
 
 .banner_main {
     position: relative;
+    margin-bottom: 25px;
 }
 
 .banner .carousel-indicators li {
@@ -18,6 +19,7 @@
     position: absolute;
     width: 100%;
     top: 50%;
+    left:22%;
     transform: translateY(-50%);
 }
 
@@ -29,10 +31,9 @@
 
 .book_room h1 {
     font-weight: 500;
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 12px;
+    line-height: 12px;
     color: #fff;
-    padding-bottom: 20px;
     text-transform: uppercase;
     text-align: center;
 }
@@ -52,13 +53,13 @@
     color: #fff;
     padding: 0 10px;
     padding-right: 61px;
-    margin-bottom: 25px;
     position: relative;
 }
 
 .book_now .error {
     color:#fff;
     text-align: center;
+    font-size: 12px;;
 }
 
 .date_cua {
@@ -81,6 +82,7 @@
     font-size: 20px;
     transition: ease-in 0.5s;
     display: block;
+    margin-top: 25px;;
 }
 
 .book_btn:hover {
@@ -88,6 +90,12 @@
     color: #fe0000;
     transition: ease-in 0.5s;
 }
+
+.book_btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #eaeaea;
+  }
 
 .carousel-control-next,
 .carousel-control-prev {
@@ -102,4 +110,5 @@
 
 .carousel-inner img { 
  min-height: 420px;
+ max-height: 420px;
 }

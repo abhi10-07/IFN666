@@ -1,0 +1,14 @@
+.stock-top-list .price{
+    color: #000;
+    font: 700 24px 'Lato', arial;
+    padding-top:3px;
+}
+
+.stock-top-list .badge-info{
+    background-color: #fff;
+    border:#000 1px solid
+}
+
+.stock-top-list .badge-info span{
+    font-size: 14px;;
+}

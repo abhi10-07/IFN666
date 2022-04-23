@@ -16,8 +16,8 @@ const Layout = (props) => {
         <BreadCrumb />
         <hr />
         {props.children}
+        <Footer />
       </main>
-      <Footer />
     </Fragment>
   );
 };

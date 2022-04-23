@@ -19,6 +19,10 @@ const Graph = (props) => {
           let timeStamp = "";
           let datePoint = "";
           let timePoint = "";
+
+          if (key.length < 10) {
+            return false;
+          }
           timeStamp = key.split(" ");
           datePoint = timeStamp[0].split("-");
           timePoint = timeStamp[1].split(":");

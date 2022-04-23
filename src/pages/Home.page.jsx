@@ -1,14 +1,14 @@
 import React from "react";
 
 import Banner from "../components/home/Banner";
-import SearchBox from "../components/home/SearchBox";
+import Home from "../components/home/Home";
 
 const HomePage = () => {
   return (
-    <div>
+    <>
       <Banner />
-      <SearchBox />
-    </div>
+      <Home />
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import UserContext from "../../context/UserContext";
+import React, { useState, useEffect } from "react";
+
 import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa";
 
 import Graph from "./Graph";
@@ -10,29 +10,40 @@ import {
   FMI_STOCK_DETAILS_URL,
 } from "../../Constants";
 
+import Loader from "../UI/Loader";
+
 import "../../assets/css/about.css";
 import tab_bg from "../../assets/images/bg_borderblue.jpg";
 
 const Stock = (props) => {
-  const { setLoaderHandler } = useContext(UserContext);
-
   const [stockDetailsData, setStockDetailsData] = useState([]);
   const [stockTextData, setStockTextData] = useState([]);
   const [stockChartData, setStockChartData] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [activeLoader, setActiveLoader] = useState(true);
+
+  const setLoaderHandler = () => {
+    setActiveLoader(false);
+  };
+
   const stockId = props.id;
 
   useEffect(() => {
     const fetchData = async () => {
       // For stock description
       const responseDesc = await fetch(FMI_STOCK_DETAILS_URL(stockId, FMI_KEY));
+      if (responseDesc.status !== 200) {
+        throw new Error(responseDesc);
+      }
       const responseDescData = await responseDesc.json();
 
       setStockDetailsData(responseDescData[0]);
 
       // For chart
       const response = await fetch(APLHA_URL(stockId, ALPHA_KEY));
+      if (response.status !== 200) {
+        throw new Error(response);
+      }
       const responseData = await response.json();
 
       const apiTextData = [];
@@ -60,12 +71,20 @@ const Stock = (props) => {
         setStockTextData(infoData);
       }
 
-      setLoaderHandler();
+      return true;
     };
     fetchData();
-  }, [stockId, setLoaderHandler]);
+  }, [stockId]);
 
-  return (
+  useEffect(() => {
+    if (stockChartData.length > 0) {
+      setLoaderHandler();
+    }
+  }, [stockChartData]);
+
+  return activeLoader ? (
+    <Loader />
+  ) : (
     <div className="about">
       <div className="container-fluid">
         <div
