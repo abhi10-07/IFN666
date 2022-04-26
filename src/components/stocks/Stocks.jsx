@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { useNavigate } from "react-router-dom";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
 import { FMI_URL, FMI_KEY } from "../../Constants";
 
 const Stocks = () => {
+  const [textIsValid, setTextIsValid] = useState(true);
+  const textInputRef = useRef();
   const [rowData, setRowData] = useState([]);
   const columns = [
     { headerName: "Name", field: "name" },
@@ -15,6 +18,12 @@ const Stocks = () => {
     { headerName: "Type", field: "type" },
   ];
 
+  const navigate = useNavigate();
+
+  const cellClickedHandler = useCallback((e) => {
+    console.log(e);
+    navigate(`/stocks/${e.data.symbol}`);
+  });
   useEffect(() => {
     fetch(FMI_URL(FMI_KEY))
       .then((res) => res.json())
@@ -40,7 +49,13 @@ const Stocks = () => {
         width: "100%",
       }}
     >
-      <AgGridReact columnDefs={columns} rowData={rowData} />
+      <AgGridReact
+        onCellClicked={cellClickedHandler}
+        columnDefs={columns}
+        rowData={rowData}
+        pagination={true}
+        paginationPageSize={10}
+      />
     </div>
   );
 };
