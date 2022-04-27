@@ -32,7 +32,7 @@ const Header = (props) => {
       <div className="header">
         <div className="container">
           <div className="row">
-            <div className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+            <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 col logo_section">
               <div className="full">
                 <div className="center-desk">
                   <div className="logo">
@@ -50,7 +50,7 @@ const Header = (props) => {
             <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
               <SearchBox />
             </div>
-            <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
               <nav className="navigation navbar navbar-expand-md navbar-dark ">
                 <button
                   className="navbar-toggler"
@@ -88,9 +88,22 @@ const Header = (props) => {
                         to="/stocks"
                         onClick={props.onclick}
                       >
-                        All Stocks
+                        Stocks
                       </NavLink>
                     </li>
+                    {/* <li
+                      className={`nav-item ${
+                        props.activeState === "price" ? " active" : ""
+                      }`}
+                    >
+                      <NavLink
+                        className="nav-link"
+                        to="/prices"
+                        onClick={props.onclick}
+                      >
+                        History
+                      </NavLink>
+                    </li> */}
                   </ul>
                 </div>
               </nav>
