@@ -4,7 +4,8 @@ import { NavLink } from "react-router-dom";
 
 import "../../assets/css/header.css";
 import LOGO from "../../assets/images/logo-stock-market.png";
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
+import SearchBox from "../UI/SearchBox";
 
 const Header = (props) => {
   const [textIsValid, setTextIsValid] = useState(true);
@@ -46,7 +47,10 @@ const Header = (props) => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+            <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+              <SearchBox />
+            </div>
+            <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4">
               <nav className="navigation navbar navbar-expand-md navbar-dark ">
                 <button
                   className="navbar-toggler"
@@ -86,26 +90,6 @@ const Header = (props) => {
                       >
                         All Stocks
                       </NavLink>
-                    </li>
-                    <li className={`nav-item`}>
-                      <Form onSubmit={submitHandler}>
-                        <input
-                          ref={textInputRef}
-                          type="text"
-                          placeholder="Search"
-                          className=""
-                          style={{ padding: 0 }}
-                        />
-                        <Button
-                          className="btn btn-outline-secondary border-left-0 border header-search"
-                          type="submit"
-                        >
-                          <FaSearch />
-                        </Button>
-                        {!textIsValid && (
-                          <p className="error">Please enter a valid Stock.</p>
-                        )}
-                      </Form>
                     </li>
                   </ul>
                 </div>

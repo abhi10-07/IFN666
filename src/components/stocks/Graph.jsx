@@ -7,11 +7,13 @@ const Graph = (props) => {
   const { stockChartData } = props;
   const [chartData, setChartData] = useState({});
   const [isLoadingChart, setIsLoadingChart] = useState(true);
+  const [chartDate, setChartDate] = useState("");
 
   const getChart = (stockChartData) => {
     const labels = [];
     const dataHighPoints = [];
     const dataLowPoints = [];
+    const stockDate = [];
 
     if (stockChartData.length !== 0) {
       stockChartData.map((item) =>
@@ -24,10 +26,11 @@ const Graph = (props) => {
             return false;
           }
           timeStamp = key.split(" ");
-          datePoint = timeStamp[0].split("-");
+          // datePoint = timeStamp[0].split("-");
           timePoint = timeStamp[1].split(":");
           timePoint = `${timePoint[0]}:${timePoint[1]}`;
-          labels.push(`${datePoint[2]}-${datePoint[1]} ${timePoint}`);
+          labels.push(`${timePoint}`);
+          stockDate.push(`${timeStamp[0]}`);
 
           Object.entries(value).forEach(([k, val]) => {
             if (k === APLHA_HIGH_POINTS) {
@@ -45,6 +48,7 @@ const Graph = (props) => {
       labels,
       highPoints: dataHighPoints,
       lowPoints: dataLowPoints,
+      stockDate,
     };
 
     return element;
@@ -66,24 +70,27 @@ const Graph = (props) => {
   useEffect(() => {
     const res = getChart(stockChartData);
 
-    res.labels.reverse();
+    let recentLabels = res.labels.slice(0, 20);
+    recentLabels.reverse();
+
+    setChartDate(res.stockDate.slice(0, 1)[0]);
 
     const datasets = [
       {
         label: "High",
-        data: res.labels.map((label, index) => res.highPoints[index]),
+        data: recentLabels.map((label, index) => res.highPoints[index]),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
         label: "Low",
-        data: res.labels.map((label, index) => res.lowPoints[index]),
+        data: recentLabels.map((label, index) => res.lowPoints[index]),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ];
 
-    const dataLabels = res.labels;
+    const dataLabels = recentLabels;
 
     const data = {
       valueSet: dataLabels.length > 0 ? true : false,
@@ -100,7 +107,10 @@ const Graph = (props) => {
   ) : (
     <figure>
       {chartData["valueSet"] === true && (
-        <LineChart options={options} data={chartData} />
+        <>
+          <LineChart options={options} data={chartData} />
+          <p>As on : {chartDate}</p>
+        </>
       )}
     </figure>
   );
