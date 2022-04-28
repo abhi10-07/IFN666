@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { useNavigate } from "react-router-dom";
 import "ag-grid-community/dist/styles/ag-grid.css";
@@ -16,14 +16,22 @@ const Stocks = () => {
     { headerName: "Price", field: "price" },
     { headerName: "Exchange", field: "exchangeShortName" },
     { headerName: "Type", field: "type" },
+    { headerName: "Action", field: "button" },
   ];
+
+  const defaultColDefs = useMemo(
+    () => ({
+      Sortable: true,
+      filter: true,
+    }),
+    []
+  );
 
   const navigate = useNavigate();
 
-  const cellClickedHandler = useCallback((e) => {
-    console.log(e);
-    navigate(`/stocks/${e.data.symbol}`);
-  });
+  const cellClickedHandler = (sym) => {
+    navigate(`/stocks/${sym}`);
+  };
   useEffect(() => {
     fetch(FMI_URL(FMI_KEY))
       .then((res) => res.json())
@@ -35,6 +43,7 @@ const Stocks = () => {
             price: stock.price,
             exchangeShortName: stock.exchangeShortName,
             type: stock.type,
+            button: "Click Details",
           };
         })
       )
@@ -45,16 +54,26 @@ const Stocks = () => {
     <div
       className="ag-theme-balham"
       style={{
-        height: "300px",
+        height: "350px",
         width: "100%",
       }}
     >
       <AgGridReact
-        onCellClicked={cellClickedHandler}
+        onCellClicked={(e) => {
+          const field = e.colDef.field;
+          const colIndex = e.columnApi
+            .getAllColumns()
+            ?.findIndex((col) => col.getColDef().field === field);
+
+          if (field === "button") {
+            cellClickedHandler(e.data.symbol);
+          }
+        }}
         columnDefs={columns}
         rowData={rowData}
         pagination={true}
         paginationPageSize={10}
+        defaultColDef={defaultColDefs}
       />
     </div>
   );
