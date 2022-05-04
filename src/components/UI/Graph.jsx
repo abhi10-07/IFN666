@@ -12,11 +12,12 @@ import {
 
 const Graph = (props) => {
   const { stockChartData, chartType, page } = props;
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState(stockChartData);
+  const [chartShowData, setChartShowData] = useState({});
   const [isLoadingChart, setIsLoadingChart] = useState(true);
   const [chartDate, setChartDate] = useState("");
 
-  const getChart = (stockChartData) => {
+  const getChart = (chartData) => {
     const labels = [];
     const dataHighPoints = [];
     const dataLowPoints = [];
@@ -25,8 +26,8 @@ const Graph = (props) => {
     const dataVolumePoints = [];
     const stockDate = [];
 
-    if (stockChartData.length !== 0) {
-      stockChartData.map((item) =>
+    if (chartData.length !== 0) {
+      chartData.map((item) =>
         Object.entries(item).forEach(([key, value]) => {
           if (key.length < 10) {
             return false;
@@ -111,7 +112,7 @@ const Graph = (props) => {
   };
 
   useEffect(() => {
-    const res = getChart(stockChartData);
+    const res = getChart(chartData);
 
     let recentLabels = res.labels.slice(0, 20);
     recentLabels.reverse();
@@ -143,12 +144,6 @@ const Graph = (props) => {
         borderColor: "rgb(253, 236, 3)",
         backgroundColor: "rgba(253, 236, 3, 0.5)",
       },
-      // {
-      //   label: "Volume",
-      //   data: recentLabels.map((label, index) => res.volumePoints[index]),
-      //   borderColor: "rgb(255, 137, 252)",
-      //   backgroundColor: "rgba(255, 137, 252, 0.5)",
-      // },
     ];
 
     const datasets = allDatasets.filter(
@@ -157,15 +152,17 @@ const Graph = (props) => {
 
     const dataLabels = recentLabels;
 
-    const data = {
+    const filteredData = {
       valueSet: dataLabels.length > 0 ? true : false,
       labels: dataLabels,
       datasets,
     };
 
-    setChartData(data);
-    data["valueSet"] ? setIsLoadingChart(false) : setIsLoadingChart(true);
-  }, [stockChartData, chartType]);
+    setChartShowData(filteredData);
+    filteredData["valueSet"]
+      ? setIsLoadingChart(false)
+      : setIsLoadingChart(true);
+  }, [chartData, chartType]);
 
   const dateFilterHandler = (filteredData) => {
     setIsLoadingChart(true);
@@ -180,13 +177,17 @@ const Graph = (props) => {
   ) : (
     <>
       {page === "Price" && (
-        <DateFilter dataFilter={dateFilterHandler} data={chartData} />
+        <DateFilter
+          dataFilter={dateFilterHandler}
+          allData={stockChartData}
+          filteredData={chartShowData}
+        />
       )}
 
       <figure>
-        {chartData["valueSet"] === true && (
+        {chartShowData["valueSet"] === true && (
           <>
-            <LineChart options={options} data={chartData} />
+            <LineChart options={options} data={chartShowData} />
             <p>As on : {chartDate}</p>
           </>
         )}
