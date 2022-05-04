@@ -1,14 +1,13 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { useNavigate } from "react-router-dom";
 import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-balham.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+import "../../assets/css/stocks.css";
 
 import { FMI_URL, FMI_KEY } from "../../Constants";
 
 const Stocks = () => {
-  const [textIsValid, setTextIsValid] = useState(true);
-  const textInputRef = useRef();
   const [rowData, setRowData] = useState([]);
   const columns = [
     { headerName: "Name", field: "name" },
@@ -16,13 +15,17 @@ const Stocks = () => {
     { headerName: "Price", field: "price" },
     { headerName: "Exchange", field: "exchangeShortName" },
     { headerName: "Type", field: "type" },
-    { headerName: "Action", field: "button" },
+    { headerName: "Action", field: "button", cellClass: "click_cell" },
   ];
 
   const defaultColDefs = useMemo(
     () => ({
-      Sortable: true,
+      editable: true,
+      sortable: true,
+      flex: 1,
+      minWidth: 100,
       filter: true,
+      resizable: true,
     }),
     []
   );
@@ -43,7 +46,7 @@ const Stocks = () => {
             price: stock.price,
             exchangeShortName: stock.exchangeShortName,
             type: stock.type,
-            button: "Click Details",
+            button: `Click here`,
           };
         })
       )
@@ -52,19 +55,15 @@ const Stocks = () => {
 
   return (
     <div
-      className="ag-theme-balham"
+      className="ag-theme-alpine"
       style={{
-        height: "350px",
+        height: "600px",
         width: "100%",
       }}
     >
       <AgGridReact
         onCellClicked={(e) => {
           const field = e.colDef.field;
-          const colIndex = e.columnApi
-            .getAllColumns()
-            ?.findIndex((col) => col.getColDef().field === field);
-
           if (field === "button") {
             cellClickedHandler(e.data.symbol);
           }

@@ -8,7 +8,7 @@ import { FMI_KEY, FMI_TOPGAINER_URL, FMI_TOPLOSER_URL } from "../../Constants";
 const Home = () => {
   const [gainer, setGainer] = useState([]);
   const [loser, setLoser] = useState([]);
-  const [active, setActive] = useState([]);
+  // const [active, setActive] = useState([]);
   const [errors, setErrors] = useState([]);
 
   const [activeLoader, setActiveLoader] = useState(true);
