@@ -42,11 +42,49 @@
     margin-bottom: 5px;
 }
 
+.header-search{margin-top: 11px;}
 
-.header-search{
-    width: 30px;
-    height: 31px;
-    padding: 0px;
-    font-size: 15px;
-    margin-bottom: 3px;
+.header-search .search {
+    height: 55px;
+    background-color: #fff;
+    padding: 1px;
+    border: 1px solid #536bf6
+}
+
+.header-search .search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 40px;
+    transition: width 0.4s linear
+}
+
+.header-search .search .search-input {
+    padding: 0 10px;
+    caret-color: #536bf6;
+    font-size: 21px;
+    font-weight: 300;
+    color: black;
+    transition: width 0.4s linear;
+    width:80%;
+}
+
+.header-search .search:hover>.search-icon {
+    background: #1A237E;
+    color: #fff
+}
+
+.header-search .search-icon {
+    height: 50px;
+    width: 50px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #536bf6
 }

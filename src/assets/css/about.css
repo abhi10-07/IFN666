@@ -26,12 +26,18 @@
 }
 
 .about_img {
-    margin-right: 40px;
     overflow: hidden;
 }
 
 .about_img figure {
     margin: 0;
+}
+
+.about_img figure p{
+    margin-top: 10px;
+    color: #999999;
+    font: 12px 'Lato', arial;
+    text-align: center;
 }
 
 .stock-tab{

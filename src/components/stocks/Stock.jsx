@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa";
 
-import Graph from "./Graph";
+import { useNavigate } from "react-router-dom";
+import Graph from "../UI/Graph";
 import {
   FMI_KEY,
   ALPHA_KEY,
   APLHA_URL,
   FMI_STOCK_DETAILS_URL,
+  STOCKCHARTDATASETS,
 } from "../../Constants";
 
 import Loader from "../UI/Loader";
@@ -21,6 +23,8 @@ const Stock = (props) => {
   const [stockChartData, setStockChartData] = useState([]);
 
   const [activeLoader, setActiveLoader] = useState(true);
+
+  const navigate = useNavigate();
 
   const setLoaderHandler = () => {
     setActiveLoader(false);
@@ -82,6 +86,10 @@ const Stock = (props) => {
     }
   }, [stockChartData]);
 
+  const navpriceHandler = () => {
+    navigate(`/stocks/${stockId}/price-history`);
+  };
+
   return activeLoader ? (
     <Loader />
   ) : (
@@ -126,12 +134,24 @@ const Stock = (props) => {
                   )}
                 </div>
                 <div className="stock-edata">{stockTextData}</div>
+                <button
+                  type="button"
+                  className="btn btn-dark"
+                  onClick={navpriceHandler}
+                >
+                  Price History
+                </button>
               </div>
             </div>
           </div>
           <div className="col-md-7">
             <div className="about_img">
-              <Graph stockChartData={stockChartData} id={props.id} />
+              <Graph
+                stockChartData={stockChartData}
+                id={props.id}
+                chartType={STOCKCHARTDATASETS}
+                page="Stock"
+              />
             </div>
           </div>
           <div className="stock_desc">{stockDetailsData["description"]}</div>
