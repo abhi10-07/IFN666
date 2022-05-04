@@ -1,0 +1,8 @@
+.click_cell{
+    font-weight: 600;
+    color: green;
+    cursor: pointer;
+    text-decoration: underline;
+    border-radius: 10px;
+    margin-top: 3px;
+}
