@@ -1,33 +1,20 @@
-import { React, useState, useRef, useEffect } from "react";
+import { React, useState, useRef, useEffect, useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { FMI_URL, FMI_KEY } from "../../Constants";
+import { SearchContext } from "../../context/SearchContext";
 
 import AutoComplete from "../UI/autocomplete/AutoComplete";
 import "../../assets/css/banner.css";
 
-const SearchBox = () => {
+const BannerSearch = () => {
   const [textIsValid, setTextIsValid] = useState(true);
   const textInputRef = useRef();
   const [stockFound, setStockFound] = useState("");
-  const [rowData, setRowData] = useState([]);
+
+  const ctx = useContext(SearchContext);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    let symbolArray = [];
-    fetch(FMI_URL(FMI_KEY))
-      .then((res) => res.json())
-      .then((stocks) =>
-        stocks.map((stock) => `${stock.name} (${stock.symbol})`)
-      )
-      .then((res) => {
-        symbolArray = res;
-        return symbolArray;
-      })
-      .then((stocks) => setRowData(stocks));
-  }, []);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -76,7 +63,8 @@ const SearchBox = () => {
                     <AutoComplete
                       textInputRef={textInputRef}
                       stockFlag={stockFlagHandler}
-                      suggestions={rowData}
+                      suggestions={ctx}
+                      divClasses="online_book"
                     />
                   </div>
                   <div className="col-md-12">
@@ -97,4 +85,4 @@ const SearchBox = () => {
   );
 };
 
-export default SearchBox;
+export default BannerSearch;

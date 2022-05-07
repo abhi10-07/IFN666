@@ -3,7 +3,7 @@ import React from "react";
 const Input = React.forwardRef((props, ref) => {
   const onChangeHandler = props.input.onChange !== "" ? props.onChange : "";
   return (
-    <div className={props.classes}>
+    <div className={props.divClasses}>
       {props.label === "" ? (
         ""
       ) : (

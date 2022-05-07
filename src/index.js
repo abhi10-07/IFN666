@@ -6,14 +6,18 @@ import Layout from "./components/layout/Layout";
 import "./index.css";
 import App from "./App";
 
+import { SearchProvider } from "./context/SearchContext";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Layout>
-      <App />
-    </Layout>
+    <SearchProvider>
+      <Layout>
+        <App />
+      </Layout>
+    </SearchProvider>
   </BrowserRouter>
 );

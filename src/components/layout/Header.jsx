@@ -1,4 +1,3 @@
-import React, { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 import "../../assets/css/header.css";
@@ -7,25 +6,6 @@ import LOGO from "../../assets/images/logo-stock-market.png";
 import SearchBox from "../UI/SearchBox";
 
 const Header = (props) => {
-  const [textIsValid, setTextIsValid] = useState(true);
-  const textInputRef = useRef();
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    const enteredText = textInputRef.current.value;
-
-    if (
-      enteredText.trim().length === 0 ||
-      enteredText === "" ||
-      enteredText == null
-    ) {
-      setTextIsValid(false);
-      return;
-    } else {
-      setTextIsValid(true);
-    }
-  };
   return (
     <header>
       <div className="header">
