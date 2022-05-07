@@ -37,7 +37,7 @@ const AutoComplete = (props) => {
     <>
       <Input
         ref={props.textInputRef}
-        classes="online_book"
+        divClasses={props.divClasses}
         label=""
         onChange={onChange}
         input={{
@@ -46,6 +46,7 @@ const AutoComplete = (props) => {
           placeholder: "Search Stock",
           value: inputTarget,
           autoComplete: "off",
+          className: props.inputClasses,
         }}
       />
       {showSuggestions && inputTarget && (

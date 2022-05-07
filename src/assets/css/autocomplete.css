@@ -24,6 +24,24 @@
     cursor: pointer;
     font-weight: 700;
   }
+
+  .header-search .suggestions{
+    background-color:#eaeaea;
+    z-index: 999;
+  }
+
+  .header-search .suggestions li{
+    color: #000;  
+  }
+
+  .header-search
+  .suggestion-active,
+  .suggestions li:hover {
+    background-color: beige ;
+    color: #000;
+    cursor: pointer;
+    font-weight: 700;
+  }
   .suggestions li:not(:last-of-type) {
     border-bottom: 1px solid #999;
   }
