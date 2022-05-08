@@ -6,6 +6,7 @@ import BreadCrumb from "../components/layout/BreadCrumb";
 
 const StockPage = () => {
   const { stockId } = useParams();
+  console.log("im here");
   return (
     <>
       <BreadCrumb />
