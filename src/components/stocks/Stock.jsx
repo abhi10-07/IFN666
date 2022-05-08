@@ -31,6 +31,7 @@ const Stock = (props) => {
   };
 
   const stockId = props.id;
+  console.log(stockId);
 
   useEffect(() => {
     const fetchData = async () => {

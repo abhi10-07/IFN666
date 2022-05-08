@@ -1,16 +1,15 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 
 import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa";
 import "../../assets/css/toplist.css";
 
-const TopList = (props) => {
+const TopListGainer = (props) => {
   return (
     <ul className="list-group stock-top-list">
-      {props.toplist.slice(0, 4).map((stock) => (
+      {props.data.map((stock) => (
         <Link
-          to={`/stocks/${stock.symbol}`}
+          to={`../stocks/${stock.symbol}`}
           className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
           _target="blank"
           key={stock.symbol}
@@ -41,4 +40,4 @@ const TopList = (props) => {
   );
 };
 
-export default TopList;
+export default TopListGainer;
