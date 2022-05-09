@@ -1,16 +1,18 @@
-import React from "react";
+import React, {useEffect,  useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FaCaretSquareDown, FaCaretSquareUp } from "react-icons/fa";
 import "../../assets/css/toplist.css";
 
 const TopListGainer = (props) => {
-  return (
+  console.log(props);
+
+  return (  
     <ul className="list-group stock-top-list">
-      {props.data.map((stock) => (
+      {props.values.map((stock) => (
         <Link
           to={`../stocks/${stock.symbol}`}
-          className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+          className="list-group-item-test list-group-item-action d-flex justify-content-between align-items-center"
           _target="blank"
           key={stock.symbol}
         >

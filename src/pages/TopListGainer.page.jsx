@@ -1,20 +1,19 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-import ToplistGainer from "../components/Top/TopListGainer";
+import TopListGainer from "../components/top/TopListGainer";
 import BreadCrumb from "../components/layout/BreadCrumb";
 
-const TopListGainer = () => {
+const TopListGainerPage = () => {
   const location = useLocation();
-  console.log(location);
 
   return (
     <>
       <BreadCrumb />
       <hr />
-      <ToplistGainer data={location.state.gainer} />
+      <TopListGainer values = {location.state.props}/>
     </>
   );
 };
 
-export default TopListGainer;
+export default TopListGainerPage;

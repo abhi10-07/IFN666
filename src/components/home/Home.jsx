@@ -18,14 +18,11 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const toToplistPage = () => {
-    navigate(`/TopListGainer`, {
-      state: {
-        gainer: gainer,
-      },
-    });
+  const toToplistPage = (props) => {
+    console.log("Home");
+    console.log(props);
 
-    //window.location.assign('/search/'+this.state.query+'/some-action');
+    navigate("/top", { state: { props:  props} })
   };
 
   useEffect(() => {
@@ -73,7 +70,7 @@ const Home = () => {
         <br></br>
         <button
           onClick={() => {
-            toToplistPage();
+            toToplistPage(gainer);
           }}
           className="toplistbutton"
         >
@@ -86,7 +83,7 @@ const Home = () => {
         <br></br>
         <button
           onClick={() => {
-            toToplistPage();
+             toToplistPage(loser);
           }}
           className="toplistbutton"
         >

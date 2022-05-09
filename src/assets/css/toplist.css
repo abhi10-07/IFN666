@@ -13,3 +13,11 @@
     font-size: 14px;;
 }
 
+.list-group-item-test{
+    position: relative;
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
