@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TopList from "./TopList";
+import TopList from "../UI/TopList";
 import Loader from "../UI/Loader";
 
 import { FMI_KEY, FMI_TOPGAINER_URL, FMI_TOPLOSER_URL } from "../../Constants";
@@ -18,10 +18,12 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const toToplistPage = () => {
-    navigate(`/TopListGainer`, {
+  const toToplistPage = (stocks, title) => {
+    window.scrollTo({ top: 0 });
+    navigate(`/toplist`, {
       state: {
-        gainer: gainer,
+        stocksList: stocks,
+        title,
       },
     });
 
@@ -69,11 +71,12 @@ const Home = () => {
     <div className="row">
       <div className="col-md-6">
         <h3>Top Gainer</h3>
-        <TopList toplist={gainer} />
+        <TopList toplist={gainer.slice(0, 4)} type="gainer" />
         <br></br>
         <button
           onClick={() => {
-            toToplistPage();
+            let title = "Top Gainer Stocks";
+            toToplistPage(gainer, title);
           }}
           className="toplistbutton"
         >
@@ -82,11 +85,12 @@ const Home = () => {
       </div>
       <div className="col-md-6">
         <h3>Top Loser</h3>
-        <TopList toplist={loser} />
+        <TopList toplist={loser.slice(0, 4)} type="loser" />
         <br></br>
         <button
           onClick={() => {
-            toToplistPage();
+            let title = "Top Loser Stocks";
+            toToplistPage(loser, title);
           }}
           className="toplistbutton"
         >

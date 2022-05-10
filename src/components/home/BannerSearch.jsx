@@ -6,6 +6,7 @@ import { SearchContext } from "../../context/SearchContext";
 
 import AutoComplete from "../UI/autocomplete/AutoComplete";
 import "../../assets/css/banner.css";
+import "../../assets/css/responsive.css";
 
 const BannerSearch = () => {
   const [textIsValid, setTextIsValid] = useState(true);

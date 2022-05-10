@@ -8,7 +8,7 @@ const StocksPage = () => {
     <>
       <BreadCrumb />
       <hr />
-      <Stocks />;
+      <Stocks />
     </>
   );
 };

@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 
 import "../../assets/css/header.css";
+import "../../assets/css/responsive.css";
 import LOGO from "../../assets/images/logo-stock-market.png";
+import navLogo from "../../assets/images/menu_icon.png";
 // import { FaSearch } from "react-icons/fa";
 import SearchBox from "../UI/SearchBox";
 
@@ -40,7 +42,13 @@ const Header = (props) => {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                 >
-                  <span className="navbar-toggler-icon"></span>
+                  <span
+                    className="navbar-toggler-icon"
+                    style={{
+                      backgroundImage: "url(" + navLogo + ")",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  ></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarsExample04">
                   <ul className="navbar-nav mr-auto">

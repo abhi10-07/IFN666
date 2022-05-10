@@ -10,7 +10,7 @@ const HistoryPage = () => {
     <>
       <BreadCrumb />
       <hr />
-      <PriceHistory id={stockId} />;
+      <PriceHistory id={stockId} />
     </>
   );
 };

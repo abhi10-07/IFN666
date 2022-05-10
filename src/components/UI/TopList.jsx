@@ -8,7 +8,7 @@ import "../../assets/css/toplist.css";
 const TopList = (props) => {
   return (
     <ul className="list-group stock-top-list">
-      {props.toplist.slice(0, 4).map((stock) => (
+      {props.toplist.map((stock) => (
         <Link
           to={`/stocks/${stock.symbol}`}
           className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"

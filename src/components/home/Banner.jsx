@@ -1,6 +1,7 @@
 import React from "react";
 
 import "../../assets/css/banner.css";
+import "../../assets/css/responsive.css";
 
 import Banner1img from "../../assets/images/stock-banner1.jpeg";
 import Banner2img from "../../assets/images/stock-banner2.jpeg";
