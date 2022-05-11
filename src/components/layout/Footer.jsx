@@ -51,7 +51,7 @@ const Footer = () => {
           <div className="container">
             <div className="row">
               <div className="col-md-10 offset-md-1">
-                <p>
+                <p style={{ marginTop: "1rem" }}>
                   © 2019 All Rights Reserved.
                   <br />
                   Developed by <Link to="javascript(0)">Abhi and Rahul</Link>

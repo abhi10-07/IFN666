@@ -5,7 +5,7 @@ import "../../assets/css/responsive.css";
 
 import Banner1img from "../../assets/images/stock-banner1.jpeg";
 import Banner2img from "../../assets/images/stock-banner2.jpeg";
-import Banner3img from "../../assets/images/stock-banner3.jpeg";
+import Banner3img from "../../assets/images/stock-banner4.jpg";
 
 import BannerSearch from "./BannerSearch";
 
