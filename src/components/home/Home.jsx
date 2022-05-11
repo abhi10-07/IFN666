@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopList from "../UI/TopList";
 import Loader from "../UI/Loader";
+import ModalError from "../UI/ModalError";
 
 import { FMI_KEY, FMI_TOPGAINER_URL, FMI_TOPLOSER_URL } from "../../Constants";
 
@@ -45,8 +46,12 @@ const Home = () => {
         }
         topLoser = await topLoser.json();
 
-        setGainer(topGainer);
-        setLoser(topLoser);
+        setGainer(
+          topGainer.length > 0
+            ? topGainer
+            : [{ error: topGainer["Error Message"] }]
+        );
+        setLoser(topLoser.length > 0 ? topLoser : []);
       } catch (error) {
         let errorArray = [];
         errorArray.push(error);
@@ -58,15 +63,18 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    setLoaderHandler();
     if (gainer.length > 0) {
-      setLoaderHandler();
     }
   }, [gainer]);
 
   return activeLoader ? (
     <Loader />
   ) : errors.length > 0 ? (
-    errors
+    <>
+      {console.log(errors[0], "Erros")}
+      <ModalError />
+    </>
   ) : (
     <div className="row">
       <div className="col-md-6">

@@ -16,7 +16,7 @@ function App() {
       <Route path="/stocks/:stockId" element={<StockPage />} />
       <Route path="/toplist/" element={<TopListStock />} />
       <Route path="/stocks/:stockId/price-history" element={<HistoryPage />} />
-      <Route path="*/" element={<PageNotFound />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

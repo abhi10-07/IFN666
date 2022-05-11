@@ -90,6 +90,9 @@
     .d_none {
         display: none;
     }
+    .booking_ocline{
+        left:0% !important
+    }
 }
 
 @media (max-width: 575px) {
@@ -111,6 +114,9 @@
     }
     .book_now .online_book {
         margin-bottom: 20px;
+    }
+    .booking_ocline{
+        left:0% !important
     }
     .book_btn {
         padding: 5px 0;

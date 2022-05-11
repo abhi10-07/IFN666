@@ -49,7 +49,7 @@ const SearchBox = () => {
           <AutoComplete
             textInputRef={textInputRef}
             stockFlag={stockFlagHandler}
-            suggestions={ctx}
+            suggestions={ctx.rowData}
             inputClasses="search-input col-md-12"
           />
           <button className="search-icon">

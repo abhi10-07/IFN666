@@ -1,4 +1,5 @@
-export const FMI_KEY = "cbfbcc3405c685d66f4623bc57dbb1a3";
+// export const FMI_KEY = "cbfbcc3405c685d66f4623bc57dbb1a3";
+export const FMI_KEY = "2e8259466b94ef11d7d938e052d5df0e";
 
 export const FMI_URL = (key) => {
   return `https://financialmodelingprep.com/api/v3/stock/list?apikey=${key}`;

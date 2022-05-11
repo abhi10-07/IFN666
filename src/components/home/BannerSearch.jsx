@@ -64,7 +64,7 @@ const BannerSearch = () => {
                     <AutoComplete
                       textInputRef={textInputRef}
                       stockFlag={stockFlagHandler}
-                      suggestions={ctx}
+                      suggestions={ctx.rowData}
                       divClasses="online_book"
                     />
                   </div>
