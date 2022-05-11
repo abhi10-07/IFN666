@@ -10,7 +10,7 @@ const Layout = (props) => {
   return (
     <Fragment>
       <Header activeState={activeState} />
-      <hr />
+      <hr style={{ marginTop: "0px" }} />
       <main className="container">
         {props.children}
         <Footer />

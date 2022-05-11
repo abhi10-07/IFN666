@@ -6,6 +6,7 @@ import StocksPage from "./pages/Stocks.page";
 import StockPage from "./pages/Stock.page";
 import HistoryPage from "./pages/History.page";
 import TopListStock from "./pages/TopListStock.page";
+import PageNotFound from "./pages/Error.page";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/stocks/:stockId" element={<StockPage />} />
       <Route path="/toplist/" element={<TopListStock />} />
       <Route path="/stocks/:stockId/price-history" element={<HistoryPage />} />
+      <Route path="*/" element={<PageNotFound />} />
     </Routes>
   );
 }

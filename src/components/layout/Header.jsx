@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import "../../assets/css/header.css";
 import "../../assets/css/responsive.css";
-import LOGO from "../../assets/images/logo-stock-market.png";
+import LOGO from "../../assets/images/Logo.png";
 import navLogo from "../../assets/images/menu_icon.png";
 // import { FaSearch } from "react-icons/fa";
 import SearchBox from "../UI/SearchBox";
@@ -21,7 +21,7 @@ const Header = (props) => {
                       <img
                         src={LOGO}
                         alt="Stock Market Website"
-                        style={{ width: "75px" }}
+                        // style={{ width: "150px" }}
                       />
                     </NavLink>
                   </div>
