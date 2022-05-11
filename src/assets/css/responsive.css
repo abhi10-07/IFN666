@@ -93,6 +93,10 @@
     .booking_ocline{
         left:0% !important
     }
+
+    .stock-tab h1 {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 575px) {
@@ -167,5 +171,8 @@
     }
     .d_none {
         display: none;
+    }
+    .stock-tab h1 {
+        font-size: 16px;
     }
 }
