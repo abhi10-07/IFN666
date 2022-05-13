@@ -1,7 +1,7 @@
 .footer {
     background: #0f1521;
-    margin-top: 90px;
-    padding-top: 60px;
+    margin-top: 40px;
+    padding-top: 30px;
     text-align: center;
 }
 
@@ -131,8 +131,6 @@ ul.social_icon li a:hover {
 }
 
 .copyright {
-    margin-top: 60px;
-    padding-bottom: 20px;
     background-color: #fff;
     border: #ff0909 solid 3px;
     border-right: inherit;
@@ -144,8 +142,7 @@ ul.social_icon li a:hover {
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    border-top: #a3aec6 solid 1px;
-    padding-top: 25px;
+    padding-top: 5px;
     font-weight: normal;
 }
 

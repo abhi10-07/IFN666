@@ -1,12 +1,13 @@
 import React from "react";
 
 import "../../assets/css/banner.css";
+import "../../assets/css/responsive.css";
 
 import Banner1img from "../../assets/images/stock-banner1.jpeg";
 import Banner2img from "../../assets/images/stock-banner2.jpeg";
-import Banner3img from "../../assets/images/stock-banner3.jpeg";
+import Banner3img from "../../assets/images/stock-banner4.jpg";
 
-import SearchBox from "./SearchBox";
+import BannerSearch from "./BannerSearch";
 
 const Banner = () => {
   return (
@@ -62,7 +63,7 @@ const Banner = () => {
           <span className="sr-only">Next</span>
         </a>
       </div>
-      <SearchBox />
+      <BannerSearch />
     </section>
   );
 };

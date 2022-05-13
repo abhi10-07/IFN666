@@ -1,19 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import Stock from "../components/stocks/Stock";
+import PriceHistory from "../components/history/PriceHistory";
 import BreadCrumb from "../components/layout/BreadCrumb";
 
-const StockPage = () => {
+const HistoryPage = () => {
   const { stockId } = useParams();
-  console.log("im here");
   return (
     <>
       <BreadCrumb />
       <hr />
-      <Stock id={stockId} />
+      <PriceHistory id={stockId} />
     </>
   );
 };
 
-export default StockPage;
+export default HistoryPage;

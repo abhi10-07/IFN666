@@ -2,7 +2,6 @@ import { Fragment, useState } from "react";
 
 import React from "react";
 import Header from "./Header";
-import BreadCrumb from "./BreadCrumb";
 import Footer from "./Footer";
 
 const Layout = (props) => {
@@ -11,10 +10,8 @@ const Layout = (props) => {
   return (
     <Fragment>
       <Header activeState={activeState} />
-      <hr />
+      <hr style={{ marginTop: "0px" }} />
       <main className="container">
-        <BreadCrumb />
-        <hr />
         {props.children}
         <Footer />
       </main>

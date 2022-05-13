@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Input from "../Input";
 import SuggestionsList from "./SuggestionsList";
@@ -11,7 +11,7 @@ const AutoComplete = (props) => {
 
   const { suggestions } = props;
 
-  const onChange = (e) => {
+  const onChangeHandler = (e) => {
     const userInput = e.target.value;
 
     // Filter our suggestions that don't contain the user's input
@@ -26,7 +26,7 @@ const AutoComplete = (props) => {
     setShowSuggestions(true);
   };
 
-  const onClick = (e) => {
+  const onClickHandler = (e) => {
     setFilteredSuggestions([]);
     setInputTarget(e.target.innerText);
     setActiveSuggestionIndex(0);
@@ -37,22 +37,23 @@ const AutoComplete = (props) => {
     <>
       <Input
         ref={props.textInputRef}
-        classes="online_book"
+        divClasses={props.divClasses}
         label=""
-        onChange={onChange}
+        onChange={onChangeHandler}
         input={{
           id: "home-search",
           type: "text",
           placeholder: "Search Stock",
           value: inputTarget,
           autoComplete: "off",
+          className: props.inputClasses,
         }}
       />
       {showSuggestions && inputTarget && (
         <SuggestionsList
           filteredSuggestions={filteredSuggestions}
           activeSuggestionIndex={activeSuggestionIndex}
-          onClick={onClick}
+          onClick={onClickHandler}
           stockFlag={props.stockFlag}
         />
       )}

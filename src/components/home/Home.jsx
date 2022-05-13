@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
-
-import TopList from "./TopList";
+import { useNavigate } from "react-router-dom";
+import TopList from "../UI/TopList";
 import Loader from "../UI/Loader";
+import ModalError from "../UI/ModalError";
 
 import { FMI_KEY, FMI_TOPGAINER_URL, FMI_TOPLOSER_URL } from "../../Constants";
 
 const Home = () => {
   const [gainer, setGainer] = useState([]);
   const [loser, setLoser] = useState([]);
-  const [active, setActive] = useState([]);
+  // const [active, setActive] = useState([]);
   const [errors, setErrors] = useState([]);
 
   const [activeLoader, setActiveLoader] = useState(true);
   const setLoaderHandler = () => {
     setActiveLoader(false);
+  };
+
+  const navigate = useNavigate();
+
+  const toToplistPage = (stocks, title) => {
+    window.scrollTo({ top: 0 });
+    navigate(`/toplist`, {
+      state: {
+        stocksList: stocks,
+        title,
+      },
+    });
+
+    //window.location.assign('/search/'+this.state.query+'/some-action');
   };
 
   useEffect(() => {
@@ -31,8 +46,12 @@ const Home = () => {
         }
         topLoser = await topLoser.json();
 
-        setGainer(topGainer);
-        setLoser(topLoser);
+        setGainer(
+          topGainer.length > 0
+            ? topGainer
+            : [{ error: topGainer["Error Message"] }]
+        );
+        setLoser(topLoser.length > 0 ? topLoser : []);
       } catch (error) {
         let errorArray = [];
         errorArray.push(error);
@@ -44,24 +63,47 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    setLoaderHandler();
     if (gainer.length > 0) {
-      setLoaderHandler();
     }
   }, [gainer]);
 
   return activeLoader ? (
     <Loader />
   ) : errors.length > 0 ? (
-    errors
+    <>
+      {console.log(errors[0], "Erros")}
+      <ModalError />
+    </>
   ) : (
     <div className="row">
       <div className="col-md-6">
         <h3>Top Gainer</h3>
-        <TopList toplist={gainer} />
+        <TopList toplist={gainer.slice(0, 4)} type="gainer" />
+        <br></br>
+        <button
+          onClick={() => {
+            let title = "Top Gainer Stocks";
+            toToplistPage(gainer, title);
+          }}
+          className="toplistbutton"
+        >
+          View More
+        </button>
       </div>
       <div className="col-md-6">
         <h3>Top Loser</h3>
-        <TopList toplist={loser} />
+        <TopList toplist={loser.slice(0, 4)} type="loser" />
+        <br></br>
+        <button
+          onClick={() => {
+            let title = "Top Loser Stocks";
+            toToplistPage(loser, title);
+          }}
+          className="toplistbutton"
+        >
+          View More
+        </button>
       </div>
     </div>
   );

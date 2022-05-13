@@ -4,6 +4,8 @@ import "../../assets/css/footer.css";
 import { FaMobileAlt, FaEnvelope, FaRegAddressCard } from "react-icons/fa";
 
 const Footer = () => {
+  const d = new Date();
+  let year = d.getFullYear();
   return (
     <footer>
       <div className="footer">
@@ -37,7 +39,7 @@ const Footer = () => {
                 <li>
                   <Link to="/">Home</Link>
                 </li>
-                <li className="active">
+                <li className="">
                   <Link to="/stocks"> Stocks</Link>
                 </li>
               </ul>
@@ -51,8 +53,8 @@ const Footer = () => {
           <div className="container">
             <div className="row">
               <div className="col-md-10 offset-md-1">
-                <p>
-                  © 2019 All Rights Reserved.
+                <p style={{ marginTop: "1rem" }}>
+                  © {year} All Rights Reserved.
                   <br />
                   Developed by <Link to="javascript(0)">Abhi and Rahul</Link>
                 </p>
